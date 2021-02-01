@@ -7,6 +7,11 @@ import PostAddForm from '../post-add-form'
 import './app.scss'
 
 export default function App() {
+	const data = [
+		{label: 'Выучить Реакт', important: false, id : 100},
+		{label: 'Сделать первое приложение на реакте', important: false, id : 101},
+		{label: 'Выпить кофе', important: false, id : 102},
+	]
 	return (
 		<div className="app">
 			<AppHeader/>
@@ -14,7 +19,7 @@ export default function App() {
 				<SearchPanel/>
 				<PostStatusFilter/>
 			</div>
-			<PostList/>
+			<PostList posts={data}/>
 			<PostAddForm/>
 		</div>
 	)

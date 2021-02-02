@@ -1,60 +1,41 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { ListGroupItem } from 'reactstrap';
 import './post-list-item.scss'
 
 
 
-export default class PostListItem extends Component {
-	state = {
-		important: false,
-		like: false
-	}
+const PostListItem = (props) => {
+	const {label, onDelete, onToggleImportant, onToggleLiked, important, like} = props;
 
-	onImportant = () => {
-		this.setState(({important}) => ({
-			important: !important
-		}))
+	let classNames = "post-list-item list-group-item d-flex justify-content-between";
+	if (important) {
+		classNames += ' important';
 	}
-
-	onLike = () => {
-		this.setState(({like}) => ({
-			like: !like
-		}))
+	if (like) {
+		classNames += ' like';
 	}
-
-	render() {
-		const {label, onDelete} = this.props;
-		const {important, like} = this.state;
-
-		let classNames = "post-list-item list-group-item d-flex justify-content-between";
-		if (important) {
-			classNames += ' important';
-		}
-		if (like) {
-			classNames += ' like';
-		}
-		return (
-			<ListGroupItem className={classNames} >
-				<span className='post-list-item-label'
-							onClick={this.onLike}
-				>{label}</span>
-				<div className='d-flex justify-content-between align-items-center'>
-					<button className='btn-star btn-sm'
-									type='button'
-									onClick={this.onImportant}
-					>
-						<i className='fa fa-star'></i>
-					</button>
-					<button className='btn-trash btn-sm'
-									onClick={onDelete}
-									type='button'
-					>
-						<i className='fa fa-trash-o'></i>
-					</button>
-					<i className='fa fa-heart'></i>
-				</div>
-			</ListGroupItem>
-		)
-	}
+	return (
+		<ListGroupItem className={classNames} >
+			<span className='post-list-item-label'
+						onClick={onToggleLiked}
+			>{label}</span>
+			<div className='d-flex justify-content-between align-items-center'>
+				<button className='btn-star btn-sm'
+								type='button'
+								onClick={onToggleImportant}
+				>
+					<i className='fa fa-star'></i>
+				</button>
+				<button className='btn-trash btn-sm'
+								onClick={onDelete}
+								type='button'
+				>
+					<i className='fa fa-trash-o'></i>
+				</button>
+				<i className='fa fa-heart'></i>
+			</div>
+		</ListGroupItem>
+	)
 }
 
+export default  PostListItem
